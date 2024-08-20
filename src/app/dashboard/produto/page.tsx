@@ -29,7 +29,7 @@ export default function ProdutoForm() {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const categoriasResponse = await axios.get('/api/adm/categoria-all-get');
+        const categoriasResponse = await axios.get('/api/adm/categoria-all-get', { headers: { 'Cache-Control': 'no-store' } });
         console.log('categoriasResponse' ,categoriasResponse.data);
         setCategorias(categoriasResponse.data.categorias);
 
