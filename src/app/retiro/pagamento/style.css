@@ -1,0 +1,13 @@
+.info, .info p{
+    font-size: 0.75rem !important;
+}
+.info{
+    border: 1px solid #434343;
+}
+.list-info{
+    list-style-type: disc;
+    margin-left: 1rem;
+}
+.atention{
+    color:#FF0101;
+}
