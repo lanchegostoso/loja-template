@@ -29,13 +29,14 @@ export default function ProdutoForm() {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const categoriasResponse = await axios.get('/api/adm/categoria-all-get', { headers: { 'Cache-Control': 'no-store' } });
-        console.log('categoriasResponse' ,categoriasResponse.data);
-        setCategorias(categoriasResponse.data.categorias);
+        const categoriasResponse = await fetch('/api/adm/categoria-all-get');
+        const data = await categoriasResponse.json();
+        setCategorias(data.categorias);
 
         if (id) {
-          const produtoResponse = await axios.get(`/api/adm/produto-get`);
-          setProduto(produtoResponse.data);
+          const produtoResponse = await fetch(`/api/adm/produto-get?id=${id}`);
+          const produtoData = await produtoResponse.json();
+          setProduto(produtoData);
         }
       } catch (error) {
         console.error('Erro ao buscar os dados:', error);
