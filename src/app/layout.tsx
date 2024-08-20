@@ -6,8 +6,8 @@ import { HeaderMenu } from '@/components/HeaderMenu';
 const notoSans = Noto_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Retiro Descencendo do Salto',
-  description: 'Redito produzido pelo projeto de mulheres Resgatando Anas Você é Terra Fértil, Nova Iguaçú',
+  title: 'Loja Template',
+  description: 'Cardápio Virtual para hamburgueria, açaiteria, sorveteria, restaurantes, delivery e muito mais.',
 }
 
 export default function RootLayout({
@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className={notoSans.className}>
       <HeaderMenu/>
-      <div className='max-w-[380px] my-20 mx-auto'>{children}</div>
+      <div className='max-w-[380px] my-24 mx-auto'>{children}</div>
       <FooterMenu/>
       </body>
     </html>

@@ -3,40 +3,42 @@ import { Users } from "@prisma/client";
 export function validateUserData(userData: Partial<Users>): string | null {
 
     for (const [key, value] of Object.entries(userData)) {
-        if (!value) {
-            return `${key} não pode estar vazio.`;
-        }
+        if (value !== undefined && value !== null) {
+            if (typeof value === 'string' && value.trim() === "") {
+                return `${key} não pode estar vazio.`;
+            }
 
-        if (typeof value === 'string' && value.length > 100) {
-            return `${key} não pode ultrapassar a quantidade de caracteres permitidos.`;
+            if (typeof value === 'string' && value.length > 100) {
+                return `${key} não pode ultrapassar a quantidade de caracteres permitidos.`;
+            }
         }
     }
 
-    if (!isValidCPF(userData.cpf!)) {
+    if (userData.cpf && !isValidCPF(userData.cpf)) {
         return "CPF inválido. Deve conter apenas números e ter 11 dígitos.";
     }
 
-    if (!isValidRG(userData.rg!)) {
+    if (userData.rg && !isValidRG(userData.rg)) {
         return "RG inválido. Deve conter apenas números e entre 8 e 11 dígitos.";
     }
 
-    if (!isValidTelefone(userData.telefone!)) {
+    if (userData.telefone && !isValidTelefone(userData.telefone)) {
         return "Telefone inválido. Deve conter apenas números e entre 10 e 11 dígitos.";
     }
 
-    if (!isValidTelefone(userData.telefone_emergencia!)) {
+    if (userData.telefone_emergencia && !isValidTelefone(userData.telefone_emergencia)) {
         return "Telefone de Emergência inválido. Deve conter apenas números e entre 10 e 11 dígitos.";
     }
 
-    if (!isValidEmail(userData.email!)) {
+    if (userData.email && !isValidEmail(userData.email)) {
         return "Email inválido.";
     }
 
-    if (!isValidBirthDate(userData.data_de_nascimento!)) {
+    if (userData.data_de_nascimento && !isValidBirthDate(userData.data_de_nascimento)) {
         return "Data de nascimento inválida. O usuário deve ter mais de 18 anos e menos de 99 anos.";
     }
 
-    if (!isValidPassword(userData.password!)) {
+    if (userData.password && !isValidPassword(userData.password)) {
         return "Senha inválida. Deve conter letras maiúsculas, minúsculas, números e ter no mínimo 8 caracteres.";
     }
 

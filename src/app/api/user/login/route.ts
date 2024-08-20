@@ -32,8 +32,8 @@ export async function POST(req: NextRequest) {
 
         const token = await AuthService.createSessionToken({ sub: user.id, type: user.type });
 
-        if(user.type === 'admin'){
-            return NextResponse.json({ message: 'Login realizado com sucesso', token, urlRedirect: '/administracao'}, { status: 200 });
+        if(user.type === 'ADMIN'){
+            return NextResponse.json({ message: 'Login realizado com sucesso', token, urlRedirect: '/dashboard'}, { status: 200 });
         }
 
         return NextResponse.json({ message: 'Login realizado com sucesso', token, urlRedirect: '/user'}, { status: 200 });

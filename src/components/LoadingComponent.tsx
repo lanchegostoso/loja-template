@@ -1,13 +1,9 @@
-import Image from 'next/image';
 export default function LoadingComponent(){
     return(
         <div className="absolute z-40 top-0 bottom-0 left-0 right-0 overflow-hidden">
             <div className="flex w-full h-full max-w-[100vw] max-h-[100vh] items-center justify-center overflow-hidden">
-                <Image className='object-cover' src={`/img/BgLoading.jpg`} alt='Imagen de Loading' width={360} height={740} layout="responsive" objectFit="cover"/>
                 <div className="absolute z-50">
                     <div className="flex flex-col h-[80vh] items-center justify-between gap-6">
-                        <Image className='' src={`/img/LogoResgatandoAnas.png`} alt='Imagen de Loading' width={230} height={215}/>
-                        <h6 className="text-white pt-4 text-[1.5rem]">Retiro Descendo do salto</h6>
                             <div>
                             <svg
                             className="w-20 h-20 animate-spin fill-primary" width="95" height="96" viewBox="0 0 95 96" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -15,7 +11,6 @@ export default function LoadingComponent(){
                             </svg>
                             </div>
                         <h6 className="text-white pt-4 text-[1.5rem] animate-pulse">Carregando...</h6>
-                        <h6 className="text-white pt-4 text-[1.2rem]">Comunidade Cristã Terra Fértil</h6>
                     </div>
                 </div>
             </div>

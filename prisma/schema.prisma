@@ -6,50 +6,67 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
-model Users {
-  id                   String   @id @default(uuid())
-  email                String   @unique
-  telefone             String?
-  image                String?
-  telefone_emergencia  String?
-  rg                   String?
-  cpf                  String?  @unique
-  data_de_nascimento   String?
-  name                 String
-  password             String
-  type                 String
-  termos_de_uso        String
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt()
-}
-model UsersAnaminese {
-  id                       String   @id @default(uuid())
-  userId                   String   @unique
-  possui_doenca            String?
-  qual_doenca              String?
-  faz_uso_medicamento      String?
-  qual_medicamento         String?
-  alergia_medicamento      String?
-  alergia_qual_medicamento String?
-  restricao_alimentar      String?
-  quais_alimentos          String?
-  tamanho_blusa            String?
-  createdAt                DateTime @default(now())
-  updatedAt                DateTime @updatedAt()
-}
 
-model PaymentUser{
+model Users {
   id                  String   @id @default(uuid())
-  userId              String
-  paymentId           String
-  paymentStatus       String
-  paymentDescription  String
-  paymentType         String
-  active              Boolean
+  email               String   @unique
+  telefone            String?
+  image               String?
+  telefone_emergencia String?
+  rg                  String?
+  cpf                 String?  @unique
+  data_de_nascimento  String?
+  name                String
+  password            String
+  type                UserType @default(USER)
+  termos_de_uso       String?
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt()
+}
+
+enum UserType {
+  ADMIN
+  USER
+  VENDEDOR
+}
+
+model PaymentUser {
+  id                 String   @id @default(uuid())
+  userId             String
+  paymentId          String
+  paymentStatus      String
+  paymentDescription String
+  paymentType        String
+  active             Boolean
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt()
+}
+
+model Categoria {
+  id        String   @id @default(uuid())
+  nome      String   @unique
+  descricao String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+
+  produtos Produto[] @relation("CategoriaProdutos")
+}
+
+model Produto {
+  id          String   @id @default(uuid())
+  nome        String
+  descricao   String?
+  preco       Float
+  quantidade  Int?
+  categoriaId String
+  imagem      String?
+  ativo       Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt()
+
+  categoria Categoria @relation("CategoriaProdutos", fields: [categoriaId], references: [id])
 }

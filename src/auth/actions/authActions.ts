@@ -42,7 +42,6 @@ async function loginAction(formData:FormData) {
 
         NextResponse.json({ message: 'Login realizado com sucesso' }, { status: 202 });
         console.log('Login realizado com sucesso!');
-        redirect(`/retiro/cadastro/dados-adicionais`)
 
     }
 

@@ -29,15 +29,11 @@ export async function GET(req: NextRequest) {
           where: { userId: id },
       });
 
-      const anaminese = await prisma.usersAnaminese.findFirst({
-          where: { userId: id },
-      });
-
-      if (user && payments && anaminese) {
-        return NextResponse.json({ status: 200, user, payments, anaminese });
-      } else if (user && payments && !anaminese) {
+      if (user && payments) {
+        return NextResponse.json({ status: 200, user, payments });
+      } else if (user && payments) {
         return NextResponse.json({ status: 200, user, payments, error: 'Dados médicos não encontrados'});
-      } else if (user && !payments && !anaminese) {
+      } else if (user && !payments) {
         return NextResponse.json({ status: 200, user, payments, error: 'Dados médicos e pagamentos não encontrados'});
       }
 

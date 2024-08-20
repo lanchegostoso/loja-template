@@ -10,7 +10,7 @@ export default async function FooterMenu() {
             {session? <>
             <Link className="flex flex-col items-center" href="/user"><BsFillPersonFill className="text-[1.5rem]" /><span>Minha Conta</span></Link>
             </>: <>
-            <Link className="flex flex-col items-center" href="/retiro/login"><BsFillPersonFill className="text-[1.5rem]" /><span>Login</span></Link>
+            <Link className="flex flex-col items-center" href="/login"><BsFillPersonFill className="text-[1.5rem]" /><span>Login</span></Link>
             </> }
             <Link className="flex flex-col items-center" href="/"><BsHouseDoorFill className="text-[1.5rem]" /><span>Home</span></Link>
             </div>

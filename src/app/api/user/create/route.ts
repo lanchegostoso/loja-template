@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient, Users } from "@prisma/client";
+import { Prisma, PrismaClient, Users, UserType } from "@prisma/client";
 import { NextRequest } from "next/server";
 import { validateUserData } from "./validations";
 import * as bcrypt from 'bcrypt'
@@ -10,7 +10,7 @@ export async function POST (req: NextRequest){
     const newUser: Partial<Users> = await req.json()
 
     let errorMessage: string | null = validateUserData(newUser);
-    let typeUser: string = newUser.type ?? 'client';
+    let typeUser: UserType = newUser.type ?? 'USER';
     if (errorMessage) {
         return Response.json({ error: errorMessage, status: 400 });
     }
@@ -20,13 +20,13 @@ export async function POST (req: NextRequest){
 try {
         const createUser = await prisma.users.create({
             data: { email:newUser.email!,
-                    telefone:newUser.telefone!,
-                    telefone_emergencia:newUser.telefone_emergencia!,
-                    rg:newUser.rg!,
-                    cpf:newUser.cpf!,
-                    data_de_nascimento:newUser.data_de_nascimento!,
+                    telefone:newUser.telefone,
+                    telefone_emergencia:newUser.telefone_emergencia,
+                    rg:newUser.rg,
+                    cpf:newUser.cpf,
+                    data_de_nascimento:newUser.data_de_nascimento,
                     name:newUser.name!,
-                    termos_de_uso:newUser.termos_de_uso!,
+                    termos_de_uso:newUser.termos_de_uso,
                     password:hashPassword,
                     type:typeUser }
         })

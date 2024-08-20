@@ -28,13 +28,10 @@ const config = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: '#E6C6C8',
+          DEFAULT: '#4C0067',
           foreground: "hsl(var(--primary-foreground))",
         },
         success: {
-          DEFAULT: '#60F5B7',
-        },
-        success700: {
           DEFAULT: '#44AE82',
         },
         success900: {

@@ -11,7 +11,7 @@ const publicRoutes = [
   '/api/mp/getAllMethods',
   '/api/user/login',
   '/retiro/cadastro/dados-pessoais',
-  '/retiro/login',
+  '/login',
   '/nao-autorizado',
 ];
 
@@ -34,13 +34,13 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/nao-autorizado', req.url));
   }
 
-  if (pathname.startsWith('/administracao')) {
+  if (pathname.startsWith('/dashboard')) {
     const sessionCookie = req.cookies.get('session');
     if (sessionCookie) {
       const { value: token } = sessionCookie;
       const payload = await AuthService.openSessionToken(token);
 
-      if (payload?.type !== 'admin') {
+      if (payload?.type !== 'ADMIN') {
         return NextResponse.redirect(new URL('/nao-autorizado', req.url));
       }
     } else {
